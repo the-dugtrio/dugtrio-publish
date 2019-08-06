@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+
+program
+  .version(require('../package').version)
+  .command('build <env>', '编译项目')
+  .command('publish <env>', '发布项目')
+  .command('validate', '检查当前项目是否存在问题').parse(process.argv);

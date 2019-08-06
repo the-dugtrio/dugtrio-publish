@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+/**
+ * 发布的流程
+ * 在env.js 内配置环境
+ */
+
+const program = require('commander');
+const packPublish = require('../lib/publish/pack_publish');
+const coverPublish = require('../lib/publish/index');
+const env = require('../lib/env');
+const chalk = require("chalk");
+const Const = require('../lib/const');
+
+program.on('--help', function () {
+    console.log('Examples:');
+    console.log('');
+    console.log('$ ft publish dev');
+    console.log('$ ft publish prepub');
+    console.log('');
+    console.log('说明:');
+    console.log(chalk.red('如果发布的目录不是 dist 文件夹，可以在 config/project.conf.js 配置项目需要发布的目录'));
+    console.log('设置 publishSourceFolder 字段为需要发布的文件夹');
+});
+
+program
+    .usage('<env>')
+    .parse(process.argv);
+
+const publishEnv = program.args[0];
+
+if (!env.validate(publishEnv)) {
+    console.error(chalk.red(`环境错误，环境可选值：${env.envs}`));
+    console.log('');
+    console.log('Examples:');
+    console.log('');
+    console.log('$ ft publish dev');
+    console.log('$ ft publish prepub');
+    process.exit(1);
+}
+
+
+env.setPublishEnv(publishEnv);
+
+// 
+if (env.coverEnvs.indexOf(publishEnv) !== -1) {
+    coverPublish.publish();
+} else {
+    console.log("开始执行打包上传～～～～～");
+    packPublish.publish();
+}

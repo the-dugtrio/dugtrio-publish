@@ -1,0 +1,27 @@
+{
+    "name": "@dugtrio-tools/dugtrio-publish",
+    "version": "0.1.0",
+    "description": "dugtrio本地发布工具",
+    "main": "index.js",
+    "bin": {
+        "ft": "bin/ft"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "the-dugtrio",
+    "license": "MIT",
+    "dependencies": {
+        "async": "^3.1.0",
+        "axios": "^0.19.0",
+        "chalk": "^2.4.2",
+        "commander": "^2.20.0",
+        "git-rev-sync": "^1.12.0",
+        "glob": "^7.1.4",
+        "semver": "^6.3.0"
+    }
+}
